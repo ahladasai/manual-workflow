@@ -1,0 +1,26 @@
+name: Manual Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select deployment environment'
+        required: false
+        default: 'dev'
+        type: string
+      version:
+        description: 'Enter version to deploy'
+        required: true
+        type: string
+
+jobs:
+  run-manual:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print inputs
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Version: ${{ github.event.inputs.version }}"
